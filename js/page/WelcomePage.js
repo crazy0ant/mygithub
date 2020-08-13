@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import { View, Text, StyleSheet} from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 class WelcomePage extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>
                 <Text>WelcomePage</Text>
+                <FontAwesome5
+                    name={'microphone'}
+                    size={30}
+                />
             </View>
         );
     }
