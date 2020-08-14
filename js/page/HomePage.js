@@ -7,14 +7,16 @@ import MyPage from "./MyPage";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import {createAppContainer} from 'react-navigation';
+import DynamicTabNavigator from "../navigator/DynamicTabNavigator";
 class HomePage extends React.Component{
+
 
     render() {
         return (
-            <View>
-                <Text>HomePage</Text>
-            </View>
+            <DynamicTabNavigator/>
+
         );
     }
 }

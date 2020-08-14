@@ -9,5 +9,5 @@ import App from './App';
 import AppNavigator from './js/navigator/AppNavigator'
 import HomePage from "./js/page/HomePage";
 import {name as appName} from './app.json';
-
+console.disableYellowBox = true;
 AppRegistry.registerComponent(appName, () => AppNavigator);

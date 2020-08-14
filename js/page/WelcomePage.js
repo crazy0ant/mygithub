@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import NavigatorUtil from "../navigator/NavigatorUtil";
 
 class WelcomePage extends Component<Props> {
     render() {
@@ -16,7 +17,7 @@ class WelcomePage extends Component<Props> {
     }
     componentDidMount() {
         this.timer = setTimeout(()=>{
-
+            NavigatorUtil.resetToHomePage(this.props)
         },1000)
     }
 
