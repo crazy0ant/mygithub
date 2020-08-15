@@ -8,6 +8,7 @@ import MyPage from "../page/MyPage";
 import Entypo from "react-native-vector-icons/Entypo";
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
+import {connect} from 'react-redux';
 //tab常量
 const TABS = {
     PopularPage: {
@@ -64,23 +65,31 @@ const TABS = {
     }
 }
 
-export default class DynamicTabNavigator extends React.Component{
+class DynamicTabNavigator extends React.Component{
     constructor(props) {
         super(props);
     }
     _tabNavigator(){
+        if(this.Tabs){
+            return this.Tabs;
+        }
         const {PopularPage,TrendingPage,FavoritePage,MyPage} = TABS;
         const tabs = {PopularPage,TrendingPage,FavoritePage,MyPage};//服务端下发，控制底部导航数量
         PopularPage.navigationOptions.tabBarLabel = '最热1';//通过这种方式动态修改属性
-        return createAppContainer(
+        return this.Tabs = createAppContainer(
             createBottomTabNavigator(
                 {...tabs},
-                {tabBarComponent:TabBarComponent}
+                {
+                    tabBarComponent:props=>{
+                        return <TabBarComponent {...props} theme={this.props.theme}/>
+                    }
+                }
             )
         )
     }
 
     render() {
+        console.log('DynamicTabNavigator:render',this.props)
         //通过jsx的语法使用导航器，不能直接return this._tabNavigator();
         const Tab = this._tabNavigator();
         return <Tab/>
@@ -88,28 +97,19 @@ export default class DynamicTabNavigator extends React.Component{
 }
 
 class TabBarComponent extends React.Component{
-    constructor(props) {
-        super(props);
-        this.theme={
-            tintColor: props.activeTintColor,
-            updateTime: new Date().getTime(),
-        }
-    }
     render() {
-        //从路由state中取出route，以及当前打开的第几个路由
-        const {routes, index} = this.props.navigation.state;
-        if(routes[index].params){
-            const { theme, } = routes[index].params;
-            //以最新的更新时间为主,防止其它tab篡改主题
-            //if(theme && theme.updateTime> this.theme.updateTime){
-                this.theme = theme;
-            //}
-        }
-
+        console.log('TabBarComponent:render',this.props)
         return <BottomTabBar
             {...this.props }
-
-            activeTintColor={this.theme.tintColor || this.props.activeTintColor/*优先从主题获取颜色，如果主题没有，从props获取颜色*/}
+            activeTintColor={this.props.theme}
         />;
     }
 }
+
+const mapStateToProps = (state)=>{
+    return {
+        theme: state.theme.theme,
+    }
+}
+
+export default connect(mapStateToProps)(DynamicTabNavigator);

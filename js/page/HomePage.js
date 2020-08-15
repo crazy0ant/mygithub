@@ -10,9 +10,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import {createAppContainer} from 'react-navigation';
 import DynamicTabNavigator from "../navigator/DynamicTabNavigator";
+import NavigatorUtil from "../navigator/NavigatorUtil";
 class HomePage extends React.Component{
 
 
+    constructor(props) {
+        super(props);
+        NavigatorUtil.navigation = this.props.navigation;
+    }
     render() {
         return (
             <DynamicTabNavigator/>

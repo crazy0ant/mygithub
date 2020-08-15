@@ -6,6 +6,7 @@ class MyPage extends React.Component{
 
     render() {
         const {navigation} = this.props;
+        console.log('MyPage:render',this.props);
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>MyPage</Text>

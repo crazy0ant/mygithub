@@ -6,6 +6,7 @@ class FavoritePage extends React.Component{
 
     render() {
         const {navigation} = this.props;
+        console.log('FavoritePage:render',this.props);
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>FavoritePage</Text>
