@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import WelcomePage from "../page/WelcomePage";
 import HomePage from "../page/HomePage";
 import DetailPage from "../page/DetailPage";
-
+import DataStoreDemoPage from "../page/DataStoreDemoPage";
 const InitNavigator = createStackNavigator(
     {
         WelcomePage:{
@@ -26,6 +26,9 @@ const MainNavigator = createStackNavigator(
         },
         DetailPage:{
             screen: DetailPage
+        },
+        DataStoreDemoPage:{
+            screen: DataStoreDemoPage
         }
     }
 )
